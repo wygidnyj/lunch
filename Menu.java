@@ -61,7 +61,7 @@ public class Menu {
      * Return  all complex
      * @return  menu as a list od dish
      */
-    public List<Dish> getAllMenu() {
+    public List<Dish> getAllDishes() {
         return dishList;
     }
 

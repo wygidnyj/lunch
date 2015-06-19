@@ -75,7 +75,7 @@ public class Dish {
         boolean contain = false;
         if(ingredients.isEmpty()){
 
-            contain = false;
+           // contain = false;
 
         } else {
             for(Ingredient z:ingredients.keySet()) {
@@ -96,9 +96,15 @@ public class Dish {
 
 
     }
+
+    @Override
+    public String toString() {
+        return dishName+" "+dishPrice;
+    }
+
     public void addOrReplaceToDish(Ingredient ingredient, Double weight){
 
-
+//TODO
     }
 
     /**

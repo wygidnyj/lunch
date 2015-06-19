@@ -17,6 +17,7 @@ public class Complex {
      * price of complex
      */
     private Double priceOfComplex;
+    private String price = " price: ";
 
     public Complex() {
     }
@@ -26,6 +27,11 @@ public class Complex {
         this.drink = drink;
         priceOfComplex = first.getDishPrice()+second.getDishPrice()+drink.getDishPrice();
 
+    }
+
+    @Override
+    public String toString() {
+        return first+" "+second+" "+drink+" "+price+priceOfComplex;
     }
 
     public Dish getFirst() {
@@ -56,7 +62,5 @@ public class Complex {
         return priceOfComplex;
     }
 
-    public void setPriceOfComplex(Double priceOfComplex) {
-        this.priceOfComplex = priceOfComplex;
-    }
+
 }

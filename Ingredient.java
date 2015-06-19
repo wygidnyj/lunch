@@ -1,5 +1,7 @@
 package complex;
 
+import java.io.Serializable;
+
 /**
  * An object complex.Ingredient is basic of complex.Dish
  * contain name and price
@@ -7,7 +9,7 @@ package complex;
  * @author Arthur M
  * @since 1.0
  */
-public class Ingredient {
+public class Ingredient{
 
     /**
      * Name of ingredient
@@ -63,5 +65,10 @@ public class Ingredient {
      */
     public void setPrice(double ingredientPrice) {
         this.ingredientPrice = ingredientPrice;
+    }
+
+    @Override
+    public String toString() {
+        return ingredientName+" "+ingredientPrice;
     }
 }
