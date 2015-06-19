@@ -1,7 +1,8 @@
 package complex;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,33 +12,33 @@ public class JsonHelper {
     private Gson gson;
 
     public JsonHelper() {
-        gson = new Gson();
+
 
     }
 
     public List<Dish> readFromFile(String fileName) {
         List<Dish> dishList = new ArrayList<>();
-        try {
-            BufferedReader br = new BufferedReader(
-                    new FileReader(fileName));
+       try {
+           FileInputStream fileInputStream = new FileInputStream(fileName);
 
-            Dish dishObject = gson.fromJson(br, Dish.class);
-            dishList.add(dishObject);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+           Reader reader = new InputStreamReader(fileInputStream);
+           gson = new GsonBuilder().create();
+           Dish dish = gson.fromJson(reader, Dish.class);
+           dishList.add(dish);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
 
         return dishList;
     }
 
     public void writeToFile(String fileName, List<Dish> dishes) {
+
         try {
-            FileWriter writer = new FileWriter(fileName);
-            for (Dish dish : dishes) {
-                String content = gson.toJson(dish, Dish.class);
-                writer.write(content);
-            }
+            Writer writer = new FileWriter(fileName);
+
+            gson = new GsonBuilder().create();
+            gson.toJson(dishes.get(0), writer);
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();

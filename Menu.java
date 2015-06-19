@@ -97,11 +97,11 @@ public class Menu {
     public void fillDishList() {
 
         Dish borsh = new Dish("Борщ", DishCategory.FIRST);
-        borsh.addToDish(new Ingredient("beet", 13.40), 1.2);
-        borsh.addToDish(new Ingredient("potatoes", 12.20), 0.4);
-        borsh.addToDish(new Ingredient("meat", 40.0), 0.4);
-        borsh.addToDish(new Ingredient("carrots", 18.37), 0.35);
-        borsh.addToDish(new Ingredient("cabbage", 14.15), 0.7);
+        borsh.addToDish(new Ingredient("beet", 13.40), 1.0);
+        borsh.addToDish(new Ingredient("potatoes", 12.00), 0.5);
+        borsh.addToDish(new Ingredient("meat", 40.0), 0.5);
+        borsh.addToDish(new Ingredient("carrots", 18.50), 0.2);
+        borsh.addToDish(new Ingredient("cabbage", 14.50), 0.7);
         this.addDish(borsh);
 
         Dish soup = new Dish("Суп", DishCategory.FIRST);

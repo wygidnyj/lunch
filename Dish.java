@@ -21,16 +21,16 @@ public class Dish {
     /**
      * Price of dish
      */
-    private Double dishPrice =0.0;
+    private double dishPrice;
     /**
      * Category of dish
      */
     private DishCategory dishCategory;
-    //map <ingredient, ingredientWeight>
+
     /**
      * Map of ingredient and ingredientWeight
      */
-    private Map<Ingredient, Double> ingredients = new HashMap<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
 
     /**
      * Constructor
@@ -72,28 +72,16 @@ public class Dish {
      * @param weight     weight of ingredient
      */
     public void addToDish(Ingredient ingredient, Double weight) {
-        boolean contain = false;
-        if(ingredients.isEmpty()){
+        double newIngredientPrice = ingredient.getPrice()*weight;
+      if (ingredients.contains(ingredient)){
+          int index = ingredients.indexOf(ingredient);
+          double oldPrice =ingredients.get(index).getPrice();
+          ingredients.get(index).setPrice(oldPrice+newIngredientPrice);
 
-           // contain = false;
-
-        } else {
-            for(Ingredient z:ingredients.keySet()) {
-                if (z.getName().toLowerCase().equals(ingredient.getName().toLowerCase())) {
-                    contain = true;
-                    break;
-                }
-            }
-
-        }
-
-
-        if (!contain){
-            ingredients.put(ingredient, weight);
-            dishPrice += ingredient.getPrice()*weight;
-
-        }
-
+      } else {
+          ingredients.add(ingredient);
+          dishPrice +=newIngredientPrice;
+      }
 
     }
 
@@ -102,10 +90,6 @@ public class Dish {
         return dishName+" "+dishPrice;
     }
 
-    public void addOrReplaceToDish(Ingredient ingredient, Double weight){
-
-//TODO
-    }
 
     /**
      * Return category of dish

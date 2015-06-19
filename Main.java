@@ -58,14 +58,12 @@ public class Main {
         }
 
         JsonHelper jsonHelper= new JsonHelper();
-        List<Dish> dishTestList = new ArrayList<>();
-        dishTestList = menu.getAllDishes();
-        dishTestList.remove(0);
-        dishTestList.remove(0);
-        dishTestList.remove(0);
-        dishTestList.remove(0);
-        jsonHelper.writeToFile(fileName,dishTestList);
-        List<Dish> dishesFromFile = jsonHelper.readFromFile(fileName);
+
+        jsonHelper.writeToFile(fileName,menu.getAllDishes());
+
+        List<Dish> dishesFromFile;
+        dishesFromFile = jsonHelper.readFromFile(fileName);
+
         System.out.println("From file; ");
         for (Dish dish:dishesFromFile){
             System.out.println(dish);
