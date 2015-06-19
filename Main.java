@@ -1,8 +1,5 @@
 package complex;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * An object last is launcher
  * contain main method
@@ -59,13 +56,12 @@ public class Main {
 
         JsonHelper jsonHelper= new JsonHelper();
 
-        jsonHelper.writeToFile(fileName,menu.getAllDishes());
+        jsonHelper.writeToFile(fileName,menu);
 
-        List<Dish> dishesFromFile;
-        dishesFromFile = jsonHelper.readFromFile(fileName);
+        Menu menuFromFile = jsonHelper.readFromFile(fileName);
 
-        System.out.println("From file; ");
-        for (Dish dish:dishesFromFile){
+        System.out.println(" From file:  ");
+        for (Dish dish:menuFromFile.getAllDishes()){
             System.out.println(dish);
         }
 
