@@ -1,11 +1,12 @@
-package complex;
+package complex.objects;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * An object complex.Menu represent complex in restaurant or cafe.
+ * An object complex Menu represent complex in restaurant or cafe.
  * <p/>
- * complex.Menu performing calculations related to complex
+ * complex.objects.Menu performing calculations related to complex
  * such as printing and print complex set lunches at the specified price.
  * Contain lists of first, second dish and drinks
  *
@@ -27,7 +28,6 @@ public class Menu {
      */
     public Menu() {
         dishList = new ArrayList<>();
-
     }
 
     /**
@@ -38,7 +38,6 @@ public class Menu {
     public void addDish(Dish dish) {
 
         dishList.add(dish);
-
     }
 
     /**
@@ -59,7 +58,8 @@ public class Menu {
 
     /**
      * Return  all complex
-     * @return  menu as a list od dish
+     *
+     * @return menu as a list od dish
      */
     public List<Dish> getAllDishes() {
         return dishList;
@@ -92,7 +92,7 @@ public class Menu {
     }
 
     /**
-     * Fill complex.Menu by some elements
+     * Fill complex.objects.Menu by some elements
      */
     public void fillDishList() {
 
@@ -114,22 +114,22 @@ public class Menu {
         Dish boulion = new Dish("Бульйон", DishCategory.FIRST);
         boulion.addToDish(new Ingredient("chicken", 45.00), 0.20);
         boulion.addToDish(new Ingredient("onion", 10), 0.2);
-        boulion.addToDish(new Ingredient("carrots", 18.37), 0.25);
-        boulion.addToDish(new Ingredient("vermicelli", 19.74), 0.12);
+        boulion.addToDish(new Ingredient("carrots", 18.50), 0.50);
+        boulion.addToDish(new Ingredient("vermicelli", 19.00), 0.10);
         this.addDish(boulion);
 
         Dish kasha = new Dish("Гречка", DishCategory.SECOND);
-        kasha.addToDish(new Ingredient("beet", 13.40), 1.0);
-        kasha.addToDish(new Ingredient("potatoes", 12.20), 0.4);
-        kasha.addToDish(new Ingredient("potatoes", 12.20), 0.4);
-        kasha.addToDish(new Ingredient("meat", 40.0), 0.4);
-        kasha.addToDish(new Ingredient("carrots", 18.37), 0.35);
-        kasha.addToDish(new Ingredient("cabbage", 14.15), 0.7);
+        kasha.addToDish(new Ingredient("beet", 13.00), 1.0);
+        kasha.addToDish(new Ingredient("potatoes", 12.00), 0.5);
+        kasha.addToDish(new Ingredient("potatoes", 12.50), 0.5);
+        kasha.addToDish(new Ingredient("meat", 40.0), 0.5);
+        kasha.addToDish(new Ingredient("carrots", 18.50), 0.5);
+        kasha.addToDish(new Ingredient("cabbage", 14.50), 0.2);
         this.addDish(kasha);
 
         Dish tea = new Dish("Чай", DishCategory.DRINK);
-        tea.addToDish(new Ingredient("carrots", 18.37), 0.35);
-        tea.addToDish(new Ingredient("onion", 10), 0.2);
+        tea.addToDish(new Ingredient("carrots", 50.00), 0.20);
+        tea.addToDish(new Ingredient("onion", 10), 0.20);
         this.addDish(tea);
 
 

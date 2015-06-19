@@ -1,6 +1,6 @@
-package complex;
+package complex.objects;
 
-/** complex.DishCategory is an Enum contains category of
+/** complex.objects.DishCategory is an Enum contains category of
  * dish existing in complex
  *
  * @author Andrii V <wygidnyj@gmail.com>

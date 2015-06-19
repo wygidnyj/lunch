@@ -1,9 +1,9 @@
-package complex;
+package complex.objects;
 
 import java.io.Serializable;
 
 /**
- * An object complex.Ingredient is basic of complex.Dish
+ * An object complex.objects.Ingredient is basic of complex.objects.Dish
  * contain name and price
  *
  * @author Arthur M

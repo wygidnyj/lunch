@@ -1,9 +1,11 @@
-package complex;
+package complex.objects;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
- * An object complex.Dish contain name  price and category
+ * An object complex.objects.Dish contain name  price and category
  *
  * @author Arthur M
  * @see Map
@@ -72,22 +74,23 @@ public class Dish {
      * @param weight     weight of ingredient
      */
     public void addToDish(Ingredient ingredient, Double weight) {
-        double newIngredientPrice = ingredient.getPrice()*weight;
-      if (ingredients.contains(ingredient)){
-          int index = ingredients.indexOf(ingredient);
-          double oldPrice =ingredients.get(index).getPrice();
-          ingredients.get(index).setPrice(oldPrice+newIngredientPrice);
+        double newIngredientPrice = ingredient.getPrice() * weight;
+        if (ingredients.contains(ingredient)) {
+            int index = ingredients.indexOf(ingredient);
+            double oldPrice = ingredients.get(index).getPrice();
+            ingredients.get(index).setPrice(oldPrice + newIngredientPrice);
 
-      } else {
-          ingredients.add(ingredient);
-          dishPrice +=newIngredientPrice;
-      }
+        } else {
+            ingredients.add(ingredient);
+
+        }
+        dishPrice += newIngredientPrice;
 
     }
 
     @Override
     public String toString() {
-        return dishName+" "+dishPrice;
+        return dishName + " " + dishPrice;
     }
 
 

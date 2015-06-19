@@ -1,5 +1,11 @@
 package complex;
 
+import complex.objects.Complex;
+import complex.objects.Dish;
+import complex.objects.DishCategory;
+import complex.objects.Menu;
+import complex.utils.JsonHelper;
+
 /**
  * An object last is launcher
  * contain main method
@@ -13,12 +19,13 @@ public class Main {
     /**
      * main method
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String firstCategory = "First dish: ";
         String secondCategory = "Second dish: ";
         String drinkCategory = "Drinks: ";
         String proposition = "Proposition for you : ";
-        String fileName = "dishes.json";
+        String fileName = "menu.json";
+        String fromFile = "From file:  ";
 
         double money = 500;
 
@@ -26,9 +33,9 @@ public class Main {
         menu.fillDishList();
 
         System.out.println(firstCategory);
-        for (Dish d : menu.getDishByCategory(DishCategory.FIRST)) {
+        for (Dish dish : menu.getDishByCategory(DishCategory.FIRST)) {
 
-            System.out.println(d);
+            System.out.println(dish);
 
         }
         System.out.println();
@@ -48,20 +55,19 @@ public class Main {
         System.out.println();
 
         System.out.println(proposition);
-        for (Complex c : menu.getComplexByPrice(money)) {
+        for (Complex complex : menu.getComplexByPrice(money)) {
 
-            System.out.println(c);
+            System.out.println(complex);
 
         }
+        System.out.println();
 
-        JsonHelper jsonHelper= new JsonHelper();
+       // JsonHelper.writeToFile(fileName, menu);
 
-        jsonHelper.writeToFile(fileName,menu);
+        Menu menuFromFile = JsonHelper.readFromFile(fileName);
 
-        Menu menuFromFile = jsonHelper.readFromFile(fileName);
-
-        System.out.println(" From file:  ");
-        for (Dish dish:menuFromFile.getAllDishes()){
+        System.out.println(fromFile);
+        for (Dish dish : menuFromFile.getAllDishes()) {
             System.out.println(dish);
         }
 

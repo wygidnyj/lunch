@@ -1,4 +1,4 @@
-package complex;
+package complex.objects;
 
 public class Complex {
     /**
