@@ -45,18 +45,6 @@ public class Dish {
         dishCategory = category;
     }
 
-    /**
-     * Returns the name of this dish.
-     *
-     * @return the name of this dish
-     */
-    public String getDishName() {
-        return dishName;
-    }
-
-    public void setDishName(String nameOfDish) {
-        this.dishName = nameOfDish;
-    }
 
     /**
      * Returns the price of this dish.
@@ -103,12 +91,29 @@ public class Dish {
         return dishCategory;
     }
 
-    /**
-     * Set category of this dish.
-     *
-     * @param dishCategory category of this dish
-     */
-    public void setDishCategory(DishCategory dishCategory) {
-        this.dishCategory = dishCategory;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Dish)) return false;
+
+        Dish dish = (Dish) o;
+
+        boolean equalsName = dishName.equals(((Dish) o).dishName);
+        boolean equalsPrice = dishPrice == ((Dish) o).dishPrice;
+        boolean equalsCategory = dishCategory.equals(((Dish) o).dishCategory);
+        return equalsName && equalsPrice && equalsCategory;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = dishName.hashCode();
+        temp = Double.doubleToLongBits(getDishPrice());
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + getDishCategory().hashCode();
+        result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
+        return result;
     }
 }

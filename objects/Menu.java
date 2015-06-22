@@ -18,6 +18,7 @@ import java.util.List;
  */
 
 public class Menu {
+
     /**
      * List of all dishes
      */
@@ -135,5 +136,19 @@ public class Menu {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Menu)) return false;
 
+        Menu menu = (Menu) o;
+
+        return dishList.equals(menu.dishList);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return dishList.hashCode();
+    }
 }

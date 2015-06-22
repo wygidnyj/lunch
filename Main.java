@@ -36,7 +36,6 @@ public class Main {
         for (Dish dish : menu.getDishByCategory(DishCategory.FIRST)) {
 
             System.out.println(dish);
-
         }
         System.out.println();
 
@@ -62,7 +61,7 @@ public class Main {
         }
         System.out.println();
 
-       // JsonHelper.writeToFile(fileName, menu);
+        JsonHelper.writeToFile(fileName, menu);
 
         Menu menuFromFile = JsonHelper.readFromFile(fileName);
 
@@ -70,7 +69,6 @@ public class Main {
         for (Dish dish : menuFromFile.getAllDishes()) {
             System.out.println(dish);
         }
-
 
     }
 

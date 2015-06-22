@@ -1,7 +1,5 @@
 package complex.objects;
 
-import java.io.Serializable;
-
 /**
  * An object complex.objects.Ingredient is basic of complex.objects.Dish
  * contain name and price

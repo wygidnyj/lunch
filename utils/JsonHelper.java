@@ -24,7 +24,8 @@ public class JsonHelper {
      * @throws FileNotFoundException
      */
 
-    public static Menu readFromFile(String fileName) throws FileNotFoundException {
+    public static Menu readFromFile(String fileName)
+            throws FileNotFoundException {
 
         FileInputStream fileInputStream = new FileInputStream(fileName);
 
@@ -43,12 +44,15 @@ public class JsonHelper {
      * @throws IOException
      */
 
-    public static void writeToFile(String fileName, Menu menu) throws IOException {
+    public static boolean writeToFile(String fileName,
+                                      Menu menu) throws IOException {
 
         Writer writer = new FileWriter(fileName);
         Gson gson = new GsonBuilder().create();
         gson.toJson(menu, writer);
         writer.close();
+
+        return true;
 
     }
 
