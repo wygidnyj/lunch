@@ -69,4 +69,28 @@ public class Ingredient{
     public String toString() {
         return ingredientName+" "+ingredientPrice;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient)) return false;
+
+        Ingredient that = (Ingredient) o;
+
+        return Double.compare(that.ingredientPrice, ingredientPrice) == 0
+                && !(ingredientName != null
+                ? !ingredientName.equals(that.ingredientName) : that.ingredientName != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = ingredientName != null ? ingredientName.hashCode() : 0;
+        temp = Double.doubleToLongBits(ingredientPrice);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
+
