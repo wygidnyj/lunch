@@ -3,6 +3,7 @@ package complex.utils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import complex.objects.Dish;
 import complex.objects.Menu;
 
 import java.io.*;
@@ -16,44 +17,39 @@ import java.io.*;
  */
 
 public class JsonHelper {
+    private static Gson gson = new GsonBuilder().create();
 
-    /**
-     * Return object Menu
-     * @param fileName name of file we want to save menu
-     * @return object Menu
-     * @throws FileNotFoundException
-     */
-
-    public static Menu readFromFile(String fileName)
+    public static Menu readFromJson(String fileName)
             throws FileNotFoundException {
 
         FileInputStream fileInputStream = new FileInputStream(fileName);
 
         Reader reader = new InputStreamReader(fileInputStream);
         JsonReader jsonReader = new JsonReader(reader);
-        Gson gson = new GsonBuilder().create();
+        gson = new GsonBuilder().create();
 
        return  gson.fromJson(jsonReader, Menu.class);
 
     }
 
-    /**
-     * Save Menu object to JSON file
-     * @param fileName name of file to store Menu object
-     * @param menu Menu object we want to save in JSON
-     * @throws IOException
-     */
 
-    public static boolean writeToFile(String fileName,
+    public static boolean writeToJson(String fileName,
                                       Menu menu) throws IOException {
 
         Writer writer = new FileWriter(fileName);
-        Gson gson = new GsonBuilder().create();
         gson.toJson(menu, writer);
         writer.close();
 
         return true;
 
+    }
+    public static String menuToJson(Menu menu){
+
+        return gson.toJson(menu,Menu.class);
+
+    }
+    public static Menu jsonToMenu(String json){
+        return gson.fromJson(json,Menu.class);
     }
 
 }

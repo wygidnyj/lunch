@@ -53,7 +53,7 @@ public class ComplexTest {
     @Test
     public void testGetPriceOfComplex() throws Exception {
 
-        Assert.assertEquals(complex.getPriceOfComplex(),60d,"not same  drink");
+        Assert.assertEquals(complex.getPriceOfComplex(),60d,"wrong price");
 
     }
 

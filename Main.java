@@ -61,15 +61,18 @@ public class Main {
         }
         System.out.println();
 
-        JsonHelper.writeToFile(fileName, menu);
+        JsonHelper.writeToJson(fileName, menu);
 
-        Menu menuFromFile = JsonHelper.readFromFile(fileName);
+        Menu menuFromFile = JsonHelper.readFromJson(fileName);
 
         System.out.println(fromFile);
         for (Dish dish : menuFromFile.getAllDishes()) {
             System.out.println(dish);
+
         }
 
+
     }
+
 
 }

@@ -4,7 +4,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DishTest {
-
     @Test
     public void testAddToDish() {
         Dish borsh = new Dish("Борщ", DishCategory.FIRST);
@@ -14,11 +13,20 @@ public class DishTest {
 
         Assert.assertEquals(borsh.getDishPrice(),121d,"wrong dish price");
 
-        borsh.addToDish(new Ingredient("potatoes", 1.00), 1.0);
+    }
+    @Test
+    public void  addTwoSameProduct(){
+        Dish tea = new Dish("Tea",DishCategory.DRINK);
+        tea.addToDish(new Ingredient("Tea",100),1.0);
+        tea.addToDish(new Ingredient("Tea",100),1.0);
 
-        Assert.assertEquals(borsh.getDishPrice(),122d,"wrong adding to dish");
+        Assert.assertEquals(tea.getNumberOfIngredients(),1
+                ,"adding same ingredients don't  work");
 
+        tea.addToDish(new Ingredient("Water",1),1.0);
 
+        Assert.assertEquals(tea.getNumberOfIngredients(),2
+                ,"adding  ingredients don't  work");
 
     }
 

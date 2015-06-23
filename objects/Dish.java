@@ -90,6 +90,10 @@ public class Dish {
     public DishCategory getDishCategory() {
         return dishCategory;
     }
+    public int getNumberOfIngredients(){
+        return ingredients.size();
+
+    }
 
     @Override
     public boolean equals(Object o) {

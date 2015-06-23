@@ -24,7 +24,7 @@ public class Ingredient{
      * @param ingredientName  name of ingredient
      * @param ingredientPrice price of ingredient
      */
-    Ingredient(String ingredientName, double ingredientPrice) {
+    public Ingredient(String ingredientName, double ingredientPrice) {
         this.ingredientName = ingredientName;
         this.ingredientPrice = ingredientPrice;
     }
