@@ -134,4 +134,12 @@ public class Dish {
         result = 31 * result + (ingredients != null ? ingredients.hashCode() : 0);
         return result;
     }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 }
