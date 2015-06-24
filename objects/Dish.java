@@ -20,6 +20,20 @@ public class Dish {
      * Name of dish
      */
     private String dishName;
+
+    public void setDishPrice(double dishPrice) {
+        this.dishPrice = dishPrice;
+    }
+
+    public String getDishName() {
+
+        return dishName;
+    }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
     /**
      * Price of dish
      */
