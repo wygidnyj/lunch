@@ -97,40 +97,56 @@ public class Menu {
      */
     public void fillDishList() {
 
+        int idOfDish = 0;
+        int idOfIngredient = 0;
+
+
+        Ingredient beet = new Ingredient("beet", 13.40,idOfIngredient++);
+        Ingredient potatos = new Ingredient("potatoes", 12.00,idOfIngredient++);
+        Ingredient meet = new Ingredient("meat", 40.0,idOfIngredient++);
+        Ingredient carrots = new Ingredient("carrots", 18.50,idOfIngredient++);
+        Ingredient cabadge = new Ingredient("cabbage", 14.15,idOfIngredient++);
+        Ingredient chicken = new Ingredient("chicken", 45.00,idOfIngredient++);
+        Ingredient onion = new Ingredient("onion", 10,idOfIngredient++);
+        Ingredient vermicelli = new Ingredient("vermicelli", 19.00,idOfIngredient++);
+
         Dish borsh = new Dish("Борщ", DishCategory.FIRST);
-        borsh.addToDish(new Ingredient("beet", 13.40), 1.0);
-        borsh.addToDish(new Ingredient("potatoes", 12.00), 0.5);
-        borsh.addToDish(new Ingredient("meat", 40.0), 0.5);
-        borsh.addToDish(new Ingredient("carrots", 18.50), 0.2);
-        borsh.addToDish(new Ingredient("cabbage", 14.50), 0.7);
+        borsh.addToDish(beet,5.0);
+        borsh.addToDish(potatos,1.0);
+        borsh.addToDish(meet,5.0);
+        borsh.addToDish(onion,0.5);
+        borsh.setIdOfDish(idOfDish++);
         this.addDish(borsh);
 
+
         Dish soup = new Dish("Суп", DishCategory.FIRST);
-        soup.addToDish(new Ingredient("carrots", 18.37), 0.35);
-        soup.addToDish(new Ingredient("onion", 10), 0.2);
-        soup.addToDish(new Ingredient("carrots", 18.37), 0.25);
-        soup.addToDish(new Ingredient("cabbage", 14.15), 0.7);
+        soup.addToDish(carrots, 0.5);
+        soup.addToDish(meet,1.0);
+        soup.addToDish(cabadge,1.0);
+        soup.addToDish(onion, 0.25);
+        soup.addToDish(vermicelli, 0.7);
+        soup.setIdOfDish(idOfDish++);
         this.addDish(soup);
 
         Dish boulion = new Dish("Бульйон", DishCategory.FIRST);
-        boulion.addToDish(new Ingredient("chicken", 45.00), 0.20);
-        boulion.addToDish(new Ingredient("onion", 10), 0.2);
-        boulion.addToDish(new Ingredient("carrots", 18.50), 0.50);
-        boulion.addToDish(new Ingredient("vermicelli", 19.00), 0.10);
+        boulion.addToDish(chicken, 0.20);
+        boulion.addToDish(onion, 0.2);
+        boulion.addToDish(carrots, 0.50);
+        boulion.addToDish(vermicelli, 0.10);
+        boulion.setIdOfDish(idOfDish++);
         this.addDish(boulion);
 
         Dish kasha = new Dish("Гречка", DishCategory.SECOND);
-        kasha.addToDish(new Ingredient("beet", 13.00), 1.0);
-        kasha.addToDish(new Ingredient("potatoes", 12.00), 0.5);
-        kasha.addToDish(new Ingredient("potatoes", 12.50), 0.5);
-        kasha.addToDish(new Ingredient("meat", 40.0), 0.5);
-        kasha.addToDish(new Ingredient("carrots", 18.50), 0.5);
-        kasha.addToDish(new Ingredient("cabbage", 14.50), 0.2);
+        kasha.addToDish(beet, 1.0);
+        kasha.addToDish(potatos, 0.5);
+        kasha.addToDish(meet, 0.5);
+        kasha.setIdOfDish(idOfDish++);
         this.addDish(kasha);
 
         Dish tea = new Dish("Чай", DishCategory.DRINK);
-        tea.addToDish(new Ingredient("carrots", 50.00), 0.20);
-        tea.addToDish(new Ingredient("onion", 10), 0.20);
+        tea.addToDish(carrots, 0.20);
+        tea.addToDish(onion, 0.20);
+        tea.setIdOfDish(idOfDish++);
         this.addDish(tea);
 
 

@@ -21,18 +21,6 @@ public class Dish {
      */
     private String dishName;
 
-    public void setDishPrice(double dishPrice) {
-        this.dishPrice = dishPrice;
-    }
-
-    public String getDishName() {
-
-        return dishName;
-    }
-
-    public void setDishName(String dishName) {
-        this.dishName = dishName;
-    }
 
     /**
      * Price of dish
@@ -42,6 +30,11 @@ public class Dish {
      * Category of dish
      */
     private DishCategory dishCategory;
+
+    /**
+     * id of dish
+     */
+    private int idOfDish;
 
     /**
      * Map of ingredient and ingredientWeight
@@ -104,7 +97,8 @@ public class Dish {
     public DishCategory getDishCategory() {
         return dishCategory;
     }
-    public int getNumberOfIngredients(){
+
+    public int getNumberOfIngredients() {
         return ingredients.size();
 
     }
@@ -142,4 +136,26 @@ public class Dish {
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
+
+    public void setDishPrice(double dishPrice) {
+        this.dishPrice = dishPrice;
+    }
+
+    public String getDishName() {
+
+        return dishName;
+    }
+
+    public void setDishName(String dishName) {
+        this.dishName = dishName;
+    }
+
+    public int getIdOfDish() {
+        return idOfDish;
+    }
+
+    public void setIdOfDish(int idOfDish) {
+        this.idOfDish = idOfDish;
+    }
+
 }

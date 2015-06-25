@@ -3,64 +3,65 @@ package complex.utils;
 import complex.objects.Dish;
 import complex.objects.DishCategory;
 import complex.objects.Ingredient;
-import complex.objects.Menu;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
-public class DBHelper {
-    static String pathToDB = "jdbc:sqlite:testDB.db";
+public class DishDAOtoDB {
+
     static String tableName = "DISHES2";
     static Connection connection = null;
     static Statement statement;
     static ResultSet resultSet = null;
 
-    public DBHelper() {
-        // Creating db
+    public DishDAOtoDB() {
+
         createDishesTable();
 
     }
 
-    public void addDishToTable(Dish dish) {
+    public void addDish(Dish dish) {
 
         String cat = "\'" + dish.getDishCategory() + "\'";
-        String ingredients = JsonHelper.
+        String ingredients = IngredientDAOtoJson.
                 ingredientListToJson(dish.getIngredients());
 
         String sql = "INSERT INTO " +
                 tableName +
-                " (ID,NAME,PRICE,CATEGORY,INGREDIENTS)"
+                " (ID,NAME,CATEGORY)"
                 + "VALUES(" + null + "," +
-                "\'" + (dish.getDishName()).trim() + "\'" + "," +
-                dish.getDishPrice() + "," +
-                cat + ",\'" +
-                ingredients + "\' )";
+                "\'" + (dish.getDishName()).trim() + "\'," +
+                cat +
+                " )";
+        System.out.println(sql);
         executeUpdateSQL(sql);
+        IngredientDAOtoDB ingredientDAOtoDB = new IngredientDAOtoDB();
+
+
 
 
     }
 
     public void createDishesTable() {
 
-        // creating of table DISHES (ID,NAME,PRICE,CATEGORY) in DataBase
         String sql = "CREATE TABLE if not exists " + tableName +
                 " (ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " NAME TEXT NOT NULL," +
-                " PRICE DOUBLE NOT NULL," +
-                " CATEGORY TEXT NOT NULL," +
-                " INGREDIENTS TEXT NOT NULL" +
+                " CATEGORY TEXT NOT NULL " +
                 ")";
         executeUpdateSQL(sql);
     }
 
-    public Menu readDishesFromTable() {
-        Menu menu = new Menu();
+    public List<Dish> getAllDishes() {
+
+        List<Dish> dishList = new ArrayList<>();
         try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(pathToDB);
+            Class.forName(DbParams.DB_PARAM);
+            connection = DriverManager.getConnection(DbParams.PATH_TO_DB);
             statement = connection.createStatement();
 
             resultSet = statement.executeQuery("SELECT * FROM " + tableName + ";");
@@ -80,12 +81,12 @@ public class DBHelper {
                         break;
                 }
                 String json = (resultSet.getString("INGREDIENTS").trim());
-                ArrayList<Ingredient> ingredients = JsonHelper
+                ArrayList<Ingredient> ingredients = IngredientDAOtoJson
                         .ingredientListFromJson(json);
                 Dish tmp = new Dish(name, category);
                 tmp.setDishPrice(price);
                 tmp.setIngredients(ingredients);
-                menu.addDish(tmp);
+                dishList.add(tmp);
             }
             resultSet.close();
             connection.close();
@@ -94,28 +95,52 @@ public class DBHelper {
             System.exit(0);
         }
 
-        return menu;
+        return dishList;
     }
 
-    public void executeUpdateSQL(String sql) {
+    public int getIdByNAme(String name){
+
+        int id = 0;
+        try {
+            Class.forName(DbParams.DB_PARAM);
+            connection = DriverManager.getConnection(DbParams.PATH_TO_DB);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM "+tableName + " WHERE NAME = '"+name+"' ";
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+
+                id = resultSet.getInt("ID");
+
+            }
+            resultSet.close();
+            connection.close();
+        } catch (Exception e) {
+            System.out.print("in this");
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+
+        return id;
+    }
+
+
+    private void executeUpdateSQL(String sql) {
 
         try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection(pathToDB);
+            Class.forName(DbParams.DB_PARAM);
+            connection = DriverManager.getConnection(DbParams.PATH_TO_DB);
             statement = connection.createStatement();
 
             statement.executeUpdate(sql);
             statement.close();
             connection.close();
         } catch (Exception e) {
+            System.out.print("Some problems in execute");
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
     }
 
-    public void executeQuerySQL(String sql){
-
-
-    }
 
 }

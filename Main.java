@@ -1,10 +1,12 @@
 package complex;
 
 import complex.objects.*;
-import complex.utils.DBHelper;
-import complex.utils.JsonHelper;
+import complex.utils.DishDAOtoDB;
+import complex.utils.IngredientDAOtoDB;
+import complex.utils.MainDB;
+import complex.utils.MetaWriter;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,22 +24,15 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
 
-//        double money = 500;
-//
         Menu menu = new Menu();
         menu.fillDishList();
-//
-//        doSomthWithMenu(menu, money);
-//
-//        doSonthWithJson(menu);
-//
-        readAndWriteToDB();
 
+        dishWriteReadtoDDB();
 
 
     }
 
-    private static void doSomthWithMenu(Menu menu, double money) {
+    private static void doMenuMethods(Menu menu, double money) {
         String firstCategory = "First dish: ";
         String secondCategory = "Second dish: ";
         String drinkCategory = "Drinks: ";
@@ -75,50 +70,33 @@ public class Main {
 
     }
 
-    private static void doSonthWithJson(Menu menu) throws IOException {
 
-        String fileName = "menu.json";
-        String fromFile = "From file:  ";
-        JsonHelper.writeToJson(fileName, menu);
 
-        Menu menuFromFile = JsonHelper.readFromJson(fileName);
 
-        System.out.println(fromFile);
-        for (Dish dish : menuFromFile.getAllDishes()) {
-            System.out.println(dish);
+    private static void dishWriteReadtoDDB() {
+        int idOfDish = 0;
+        int idOfIngredient = 0;
 
-        }
+        DishDAOtoDB dishDAOtoDB = new DishDAOtoDB();
 
-//        String json = JsonHelper.ingredientListToJson(menu.getAllDishes()
-//                .get(0).getIngredients());
-//        System.out.println(json);
-//        ArrayList ingredientsList = JsonHelper.ingredientListFromJson(json);
-//        System.out.println(ingredientsList);
-    }
+        Ingredient beet = new Ingredient("beet", 13.40, idOfIngredient++);
+        beet.setWeight(0.5);
+        Ingredient potatos = new Ingredient("potatoes", 12.00, idOfIngredient++);
+        potatos.setWeight(1.0);
+        Ingredient meet = new Ingredient("meat", 40.0, idOfIngredient++);
+        meet.setWeight(2);
+        Ingredient onion = new Ingredient("onion", 10, idOfIngredient++);
+        onion.setWeight(0.2);
 
-    private static void readAndWriteToDB() {
+        Dish borsh = new Dish("Борщ", DishCategory.FIRST);
+        borsh.addToDish(beet, 5.0);
+        borsh.addToDish(potatos, 1.0);
+        borsh.addToDish(meet, 5.0);
+        borsh.addToDish(onion, 0.5);
+        borsh.setIdOfDish(++idOfDish);
 
-        Menu menuOut = new Menu(); // Menu for writing to DB
-        Menu menuIn; // Menu for reading from DB
-        menuOut.fillDishList();
-        List<Dish> dishList = menuOut.getAllDishes();
-
-        DBHelper dbHelper = new DBHelper();
-
-        for (Dish j : dishList) {
-            dbHelper.addDishToTable(j);
-        }
-
-        // read all dishes from out DataBase
-        menuIn = dbHelper.readDishesFromTable();
-        // show all dishes from menuIn
-        dishList = menuIn.getAllDishes();
-        for (Dish j1 : dishList) {
-            System.out.println(j1.getDishName());
-            for (Ingredient i : j1.getIngredients()) {
-                System.out.println(i);
-            }
-        }
+        MainDB db = new MainDB();
+        db.saveDish(borsh);
 
     }
 

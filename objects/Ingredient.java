@@ -18,6 +18,12 @@ public class Ingredient{
      */
     private double ingredientPrice;
 
+    private double weight;
+    /**
+     * id of ingredient
+     */
+    private int idOfIngredient;
+
     /**
      * Constructor
      *
@@ -27,6 +33,11 @@ public class Ingredient{
     public Ingredient(String ingredientName, double ingredientPrice) {
         this.ingredientName = ingredientName;
         this.ingredientPrice = ingredientPrice;
+    }
+    public Ingredient(String ingredientName, double ingredientPrice,int idOfIngredient){
+        this.ingredientName = ingredientName;
+        this.ingredientPrice = ingredientPrice;
+        this.idOfIngredient = idOfIngredient;
     }
 
     /**
@@ -65,6 +76,22 @@ public class Ingredient{
         this.ingredientPrice = ingredientPrice;
     }
 
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public int getIdOfIngredient() {
+        return idOfIngredient;
+    }
+
+    public void setIdOfIngredient(int idOfIngredient) {
+        this.idOfIngredient = idOfIngredient;
+    }
+
     @Override
     public String toString() {
         return ingredientName+" "+ingredientPrice;
@@ -91,6 +118,22 @@ public class Ingredient{
         temp = Double.doubleToLongBits(ingredientPrice);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
+    }
+
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
+
+    public double getIngredientPrice() {
+        return ingredientPrice;
+    }
+
+    public void setIngredientPrice(double ingredientPrice) {
+        this.ingredientPrice = ingredientPrice;
     }
 }
 
