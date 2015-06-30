@@ -19,10 +19,9 @@ public class Ingredient{
     private double ingredientPrice;
 
     private double weight;
-    /**
-     * id of ingredient
-     */
-    private int idOfIngredient;
+
+    public Ingredient() {
+    }
 
     /**
      * Constructor
@@ -30,14 +29,10 @@ public class Ingredient{
      * @param ingredientName  name of ingredient
      * @param ingredientPrice price of ingredient
      */
+
     public Ingredient(String ingredientName, double ingredientPrice) {
         this.ingredientName = ingredientName;
         this.ingredientPrice = ingredientPrice;
-    }
-    public Ingredient(String ingredientName, double ingredientPrice,int idOfIngredient){
-        this.ingredientName = ingredientName;
-        this.ingredientPrice = ingredientPrice;
-        this.idOfIngredient = idOfIngredient;
     }
 
     /**
@@ -82,14 +77,6 @@ public class Ingredient{
 
     public void setWeight(double weight) {
         this.weight = weight;
-    }
-
-    public int getIdOfIngredient() {
-        return idOfIngredient;
-    }
-
-    public void setIdOfIngredient(int idOfIngredient) {
-        this.idOfIngredient = idOfIngredient;
     }
 
     @Override

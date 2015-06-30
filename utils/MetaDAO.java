@@ -7,13 +7,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class MetaWriter {
+public class MetaDAO {
     static String tableName = "META";
     static Connection connection = null;
     static Statement statement;
     static ResultSet resultSet = null;
 
-    public MetaWriter() {
+    public MetaDAO() {
         createTable();
     }
 

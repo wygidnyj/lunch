@@ -2,12 +2,6 @@ package complex;
 
 import complex.objects.*;
 import complex.utils.DishDAOtoDB;
-import complex.utils.IngredientDAOtoDB;
-import complex.utils.MainDB;
-import complex.utils.MetaWriter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An object last is launcher
@@ -74,29 +68,43 @@ public class Main {
 
 
     private static void dishWriteReadtoDDB() {
-        int idOfDish = 0;
-        int idOfIngredient = 0;
+
 
         DishDAOtoDB dishDAOtoDB = new DishDAOtoDB();
 
-        Ingredient beet = new Ingredient("beet", 13.40, idOfIngredient++);
-        beet.setWeight(0.5);
-        Ingredient potatos = new Ingredient("potatoes", 12.00, idOfIngredient++);
-        potatos.setWeight(1.0);
-        Ingredient meet = new Ingredient("meat", 40.0, idOfIngredient++);
-        meet.setWeight(2);
-        Ingredient onion = new Ingredient("onion", 10, idOfIngredient++);
-        onion.setWeight(0.2);
+        Ingredient beet = new Ingredient("beet", 1);
+        beet.setWeight(1);
+        Ingredient potatos = new Ingredient("potatoes", 1);
+        potatos.setWeight(1);
+        Ingredient meet = new Ingredient("meat", 1);
+        meet.setWeight(1);
+        Ingredient onion = new Ingredient("onion", 1);
+        onion.setWeight(1);
 
         Dish borsh = new Dish("Борщ", DishCategory.FIRST);
-        borsh.addToDish(beet, 5.0);
+        borsh.addToDish(beet, 1.0);
         borsh.addToDish(potatos, 1.0);
-        borsh.addToDish(meet, 5.0);
-        borsh.addToDish(onion, 0.5);
-        borsh.setIdOfDish(++idOfDish);
+        borsh.addToDish(meet, 1.0);
+        borsh.addToDish(onion, 1.0);
 
-        MainDB db = new MainDB();
-        db.saveDish(borsh);
+        Dish boulion = new Dish("Бульйон", DishCategory.FIRST);
+        boulion.addToDish(meet, 1.0);
+        boulion.addToDish(onion, 1.0);
+        boulion.addToDish(potatos, 1.0);
+
+        DishDAOtoDB db = new DishDAOtoDB();
+        db.addDish(borsh);
+        db.addDish(borsh);
+        db.addDish(boulion);
+        System.out.println(borsh);
+        System.out.println(boulion);
+
+        for (Dish d:db.getAllDishes()){
+            System.out.println(d);
+
+        }
+
+
 
     }
 

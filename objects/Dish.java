@@ -32,11 +32,6 @@ public class Dish {
     private DishCategory dishCategory;
 
     /**
-     * id of dish
-     */
-    private int idOfDish;
-
-    /**
      * Map of ingredient and ingredientWeight
      */
     private List<Ingredient> ingredients = new ArrayList<>();
@@ -135,6 +130,9 @@ public class Dish {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
+        setDishPrice(calcPrice());
+
+
     }
 
     public void setDishPrice(double dishPrice) {
@@ -146,16 +144,12 @@ public class Dish {
         return dishName;
     }
 
-    public void setDishName(String dishName) {
-        this.dishName = dishName;
-    }
-
-    public int getIdOfDish() {
-        return idOfDish;
-    }
-
-    public void setIdOfDish(int idOfDish) {
-        this.idOfDish = idOfDish;
+    private double calcPrice() {
+        double price = 0;
+        for (Ingredient i : ingredients) {
+            price += i.getPrice();
+        }
+        return price;
     }
 
 }

@@ -58,8 +58,7 @@ public class IngredientDAOtoDB {
             while (resultSet.next()) {
                 String name = (resultSet.getString("NAME").trim());
                 double price = resultSet.getDouble("PRICE");
-                int idOfIngredient = resultSet.getInt("ID");
-                Ingredient tmpIngredient = new Ingredient(name, price, idOfIngredient);
+                Ingredient tmpIngredient = new Ingredient(name, price);
 
                 ingredients.add(tmpIngredient);
             }
@@ -73,6 +72,39 @@ public class IngredientDAOtoDB {
 
         return ingredients;
 
+    }
+    public List<Ingredient> getIngredientByDishID(int id){
+        List<Ingredient> ingredients = new ArrayList<>();
+        try {
+            Class.forName(DbParams.DB_PARAM);
+            connection = DriverManager.getConnection(DbParams.PATH_TO_DB);
+            statement = connection.createStatement();
+
+            String sql = "SELECT INGREDIENTS.ID, INGREDIENTS.NAME, INGREDIENTS.PRICE, META.WEIGHT\n" +
+                    "FROM META\n" +
+                    "JOIN INGREDIENTS\n" +
+                    "ON META.ID_INGREDIENT=INGREDIENTS.ID\n" +
+                    "WHERE META.ID_DISH="+id;
+            resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String name = (resultSet.getString("NAME").trim());
+                double price = resultSet.getDouble("PRICE");
+                double weight = resultSet.getInt("WEIGHT");
+                Ingredient tmpIngredient = new Ingredient();
+                tmpIngredient.setName(name);
+                tmpIngredient.setPrice(price);
+                tmpIngredient.setWeight(weight);
+                ingredients.add(tmpIngredient);
+            }
+            resultSet.close();
+            connection.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+
+        return ingredients;
     }
 
     public int getIdByName(String name){

@@ -2,6 +2,7 @@ package complex.utils;
 
 import complex.objects.Dish;
 import complex.objects.DishCategory;
+import complex.objects.Info;
 import complex.objects.Ingredient;
 
 import java.sql.Connection;
@@ -17,30 +18,47 @@ public class DishDAOtoDB {
     static Connection connection = null;
     static Statement statement;
     static ResultSet resultSet = null;
+    private IngredientDAOtoDB ingredientDAO;
+    private MetaDAO metaDAO;
 
     public DishDAOtoDB() {
 
         createDishesTable();
+        ingredientDAO = new IngredientDAOtoDB();
+        metaDAO = new MetaDAO();
 
     }
 
     public void addDish(Dish dish) {
 
-        String cat = "\'" + dish.getDishCategory() + "\'";
-        String ingredients = IngredientDAOtoJson.
-                ingredientListToJson(dish.getIngredients());
 
-        String sql = "INSERT INTO " +
-                tableName +
-                " (ID,NAME,CATEGORY)"
-                + "VALUES(" + null + "," +
-                "\'" + (dish.getDishName()).trim() + "\'," +
-                cat +
-                " )";
-        System.out.println(sql);
-        executeUpdateSQL(sql);
-        IngredientDAOtoDB ingredientDAOtoDB = new IngredientDAOtoDB();
+        if (!isInTable(dish.getDishName())){
+            String cat = "\'" + dish.getDishCategory() + "\'";
+            String ingredients = IngredientDAOtoJson.
+                    ingredientListToJson(dish.getIngredients());
 
+            String sql = "INSERT INTO " +
+                    tableName +
+                    " (ID,NAME,CATEGORY)"
+                    + "VALUES(" + null + "," +
+                    "\'" + (dish.getDishName()).trim() + "\'," +
+                    cat +
+                    " )";
+            executeUpdateSQL(sql);
+
+            int dishID = getIdByNAme(dish.getDishName());
+
+            for (Ingredient i:dish.getIngredients()){
+                ingredientDAO.addIngredient(i);
+                int ingredientID = ingredientDAO.getIdByName(i.getName());
+                Info info = new Info();
+                info.setIdDish(dishID);
+                info.setIdIngr(ingredientID);
+                info.setWeight(i.getWeight());
+                metaDAO.addInfo(info);
+
+            }
+        }
 
 
 
@@ -66,8 +84,8 @@ public class DishDAOtoDB {
 
             resultSet = statement.executeQuery("SELECT * FROM " + tableName + ";");
             while (resultSet.next()) {
+                int dishID = resultSet.getInt("ID");
                 String name = (resultSet.getString("NAME").trim());
-                double price = resultSet.getDouble("PRICE");
                 DishCategory category;
                 switch ((resultSet.getString("CATEGORY")).trim()) {
                     case "FIRST":
@@ -79,12 +97,11 @@ public class DishDAOtoDB {
                     default:
                         category = DishCategory.DRINK;
                         break;
-                }
-                String json = (resultSet.getString("INGREDIENTS").trim());
-                ArrayList<Ingredient> ingredients = IngredientDAOtoJson
-                        .ingredientListFromJson(json);
+                    }
+
+                List<Ingredient> ingredients = ingredientDAO.getIngredientByDishID(dishID);
+
                 Dish tmp = new Dish(name, category);
-                tmp.setDishPrice(price);
                 tmp.setIngredients(ingredients);
                 dishList.add(tmp);
             }
@@ -110,6 +127,7 @@ public class DishDAOtoDB {
             while (resultSet.next()) {
 
                 id = resultSet.getInt("ID");
+
 
             }
             resultSet.close();
@@ -140,6 +158,26 @@ public class DishDAOtoDB {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+    }
+
+    private Boolean isInTable(String dishName) {
+        Boolean isInTable = false;
+        try {
+            Class.forName(DbParams.DB_PARAM);
+            connection = DriverManager.getConnection(DbParams.PATH_TO_DB);
+            statement = connection.createStatement();
+            String sql = "SELECT * FROM " + tableName + " WHERE NAME = '" + dishName + "' ";
+            resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                isInTable = true;
+            }
+            resultSet.close();
+            connection.close();
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return isInTable;
     }
 
 
